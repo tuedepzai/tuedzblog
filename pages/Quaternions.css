@@ -1,0 +1,66 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+@font-face {
+  font-family: 'MyOpenFont'; /* Name it whatever you want */
+  src: url('assets/fonts/font.otf') format('woff2'),
+       url('assets/fonts/font.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  font-size: 1.6rem;
+  font-family: 'MyOpenFont';
+}
+
+.quote {
+  font-style: italic;
+  font-size: 1.4rem;
+}
+
+.quote::before {
+  content: '"';
+}
+
+.quote::after {
+  content: '"';
+}
+
+.image-frame {
+  width: 30rem;
+  height: 20rem;
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  background: #f7f7f7;
+}
+
+.image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.container {
+  max-width: 100vw;
+  height: 100vw;
+  margin: 0 auto;
+
+}
+

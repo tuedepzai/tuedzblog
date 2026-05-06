@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tue's blog</title>
+    <link rel="stylesheet" href="../font.css">
+    <link rel="stylesheet" href="./Quaternions.css">
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+    <div class="container" style="padding-bottom: 5vw;">
+        <h2>Quaternion</h2>
+        <hr>
+        <div class="Article">
+            <h3>Đôi chút về Quaternion</h3>
+            <p>Nếu các bạn đã làm game hay đồ họa 3D, bạn có thể đã nghe đến khái niệm Quaternion. Bạn đã thử lên goole search và bạn tìm được khái niệm như sau:</p>
+            <p class="quote">The unit quaternions give a group structure on the 3-sphere S3 isomorphic to the groups Spin(3) and SU(2), i.e. the universal cover group of SO(3). The positive and negative basis vectors form the eight-element quaternion group.</p>
+            <p>Welp không ai hiểu cái này cả, kể cả tôi vì tôi không học chuyên ngành toán, tuy vậy thực ra Quaternion khá là dễ dùng, bạn không cần hiểu nhóm lie và đại số lie để dùng được cái này.
+            Quaternion lợi dụng số ảo (i, j, k) để biểu diễn một phép quay trong không gian 3D, đặc biệt nó còn tránh được hiện tượng gimbal lock(bạn tự tra youtube tìm hiểu nhé ;v). Cụ thể hơn, một quaternion có dạng $$q = a + bi + cj + dk $$ trong đó $a \in \mathbb{R}$ là phần thực và $$bi + cj + dk$$ là phần ảo với $b,c,d \in \mathbb{R}$.</p>
+            </p>
+        </div>
+        <h3>Quaternion cho phép quay</h3>
+        <div class="Article">
+            <p>Để biểu diễn một phép quay trong không gian 3D, chúng ta có thể sử dụng một quaternion đơn vị (unit quaternion). Một quaternion đơn vị có dạng:</p>
+            <p >$$q = \cos\left(\frac{\theta}{2}\right) + \sin\left(\frac{\theta}{2}\right)(xi + yj + zk)$$</p>
+            <p>Trong đó $\theta$ là góc quay và $(x, y, z)$ là vector đơn vị chỉ hướng quay. Quaternion này có thể được sử dụng để quay một vector trong không gian 3D bằng cách sử dụng phép nhân quaternion. <br> Lưu ý Quaternion cho phép quay luôn luôn là 1 quaternion đơn vị tức là $$x^2 + y^2 + z^2 = 1$$</p>
+            <p>Tôi đã minh họa cho các bạn trên matlab, với đường màu đỏ là vector quay, và hộp màu xanh lá cây là hộp ban đầu và xanh nước biển là hộp đã được xoay theo Quaternion </p>
+            <div class="image-frame">
+                <img src="../assets/picture/QuaternionRotation.jpg" alt="Description">
+            </div>
+            <p>Để áp dụng phép quay ta sẽ có công thức như sau: $$q^{'} = q \cdot p \cdot q^{-1}$$ với $p^{-1}$ là phép quay nghịch đảo của quaternion $p$ và có công thức như sau $$p^{-1} = \cos\left(\frac{\theta}{2}\right) - \sin\left(\frac{\theta}{2}\right)(xi + yj + zk)$$</p>
+        </div>
+        <h3>1 Số công thức quy đổi từ Quaternion sang các phép quay khác</h3>
+        <div class="Article">
+            <p>Để quy đổi từ Quaternion sang ma trận quay ta sẽ có công thức như sau:</p>
+            <p>$$R = \begin{bmatrix}1 - 2y^2 - 2z^2 & 2xy - 2zw & 2xz + 2yw \\\\ 2xy + 2zw & 1 - 2x^2 - 2z^2 & 2yz - 2xw \\\\ 2xz - 2yw & 2yz + 2xw & 1 - 2x^2 - 2y^2\end{bmatrix}$$</p>
+            <p>Để quy đổi từ Quaternion sang Euler angles ta sẽ có công thức như
+            <p>$$\begin{cases}roll = \arctan\left(\frac{2(q_0q_1 + q_2q_3)}{1 - 2(q_1^2 + q_2^2)}\right)\\\\ pitch = \arcsin\left(2(q_0q_2 - q_3q_1)\right)\\\\ yaw = \arctan\left(\frac{2(q_0q_3 + q_1q_2)}{1 - 2(q_2^2 + q_3^2)}\right)\end{cases}$$</p>
+        </div>
+        <h3>Kết luận</h3>
+        <div class="Article">
+            <p>Quaternion là một công cụ mạnh mẽ để biểu diễn và tính toán các phép quay trong không gian 3D, đặc biệt là khi cần tránh hiện tượng gimbal lock. Việc hiểu và sử dụng quaternion có thể giúp bạn trong các ứng dụng về Robotics sau này</p>
+        </div>
+        <h3>Áp dụng</h3>
+        <div class="Article">
+            <p>ừng vôi đi đâu, học mà không có áp dụng thì sao nhớ được :))) đây là 1 số bài viết sẽ liên quan tới Quaternion:</p>
+            <ul class="simple-link-list">
+    <li><a href="./pages/Quaternions.html">Màng lọc Magwick</a></li>
+    <li><a href="#">tf2::Quaternion</a></li>
+    <p>Bài viết đến đây là hết cảm ơn các bạn đã xem</p>
+   <div class="image-frame">
+                <img src="../assets/gif/end.gif" alt="Quaternion visualization">
+            </div>
+  </ul>
+        </div>
+    </div>
+</body>
+</html>
